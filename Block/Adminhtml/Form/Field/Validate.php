@@ -1,19 +1,19 @@
 <?php
 /**
- *  Magecom
+ * Magecom
  *
- *  NOTICE OF LICENSE
+ * NOTICE OF LICENSE
  *
- *  This source file is subject to the Open Software License (OSL 3.0)
- *  that is bundled with this package in the file LICENSE.txt.
- *  It is also available through the world-wide-web at this URL:
- *  http://opensource.org/licenses/osl-3.0.php
- *  If you did not receive a copy of the license and are unable to
- *  obtain it through the world-wide-web, please send an email
- *  to info@magecom.net so we can send you a copy immediately.
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@magecom.net so we can send you a copy immediately.
  *
  * @category Magecom
- * @package Magecom_Donation
+ * @package Magecom_Checkout
  * @copyright Copyright (c) 2019 Magecom, Inc. (http://www.magecom.net)
  * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -45,6 +45,7 @@ class Validate extends Serialized
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param array $data
      * @param Json|null $serializer
+     * phpcs:disable MEQP2.Classes.ConstructorOperations.CustomOperationsFound
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -55,7 +56,6 @@ class Validate extends Serialized
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
         Json $serializer = null
-
     ) {
         $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
         parent::__construct(
@@ -69,6 +69,7 @@ class Validate extends Serialized
             $serializer
         );
     }
+    /**phpcs:disable*/
 
     /**
      * @return Serialized|void
@@ -76,7 +77,7 @@ class Validate extends Serialized
     public function beforeSave()
     {
         if (!empty($this->getValue()) && is_array($this->getValue())) {
-            $values[] = $this->getValue(); // check!!!
+            $values[] = $this->getValue();
             $this->convertToFloat($values);
             if (array_key_exists('__empty', $values)) {
                 unset($values['__empty']);
